@@ -1,5 +1,8 @@
-from django.db import models
+"""
+Database models.
+"""
 from django.conf import settings
+from django.db import models
 from django.contrib.auth.models import (
     AbstractBaseUser,
     BaseUserManager,
@@ -21,7 +24,7 @@ class UserManager(BaseUserManager):
         return user
 
     def create_superuser(self, email, password):
-
+        """Create and return a new superuser."""
         user = self.create_user(email, password)
         user.is_staff = True
         user.is_superuser = True
@@ -31,6 +34,7 @@ class UserManager(BaseUserManager):
 
 
 class User(AbstractBaseUser, PermissionsMixin):
+    """User in the system."""
     email = models.EmailField(max_length=255, unique=True)
     name = models.CharField(max_length=255)
     is_active = models.BooleanField(default=True)
@@ -40,7 +44,9 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     USERNAME_FIELD = 'email'
 
+
 class Recipe(models.Model):
+    """Recipe object."""
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
