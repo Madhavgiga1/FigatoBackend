@@ -10,12 +10,27 @@ from user.serializers import (
     AuthTokenSerializer,
 )
 
+"""generics.CreateAPIView is a class-based view provided by Django REST 
+Framework for handling HTTP POST requests to create new objects.
 
+It inherits from generics.GenericAPIView, which provides 
+the basic functionality for processing requests and responses.
+
+CreateAPIView adds behavior specific to creating objects by 
+using a serializer class specified in the serializer_class attribute.
+"""
 class CreateUserView(generics.CreateAPIView):
     """Create a new user in the system."""
     serializer_class = UserSerializer
 
 
+"""ObtainAuthToken is a class-based view provided by Django REST Framework
+ for obtaining authentication tokens.
+
+It handles HTTP POST requests with user credentials (such as email and 
+password) to authenticate users and generate authentication tokens.
+
+It inherits from APIView, the base class for all class-based views in Django REST Framework."""
 class CreateTokenView(ObtainAuthToken):
     """Create a new auth token for user."""
     serializer_class = AuthTokenSerializer
